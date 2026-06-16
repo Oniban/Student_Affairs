@@ -108,29 +108,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Structural Hierarchy Outline / Policy info */}
-        <section className="rounded-lg border border-indigo-100 bg-indigo-50/20 p-6 dark:border-indigo-950/40 dark:bg-slate-900/50">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <BookOpen className="h-6 w-6 text-indigo-600 dark:text-amber-500 shrink-0" />
-              <div>
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                  Student Conduct & Handbook Policy
-                </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400">
-                  Read the complete handbook detailing rights, codes, residential rules, and academic integrity policies.
-                </p>
-              </div>
-            </div>
-            <a
-              href="/resources"
-              className="rounded-md bg-white border border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:border-slate-800 dark:hover:bg-slate-800 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 transition-colors shrink-0"
-            >
-              Download Handbook
-            </a>
-          </div>
-        </section>
-
       </div>
     </div>
   );

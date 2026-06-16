@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, AlertCircle, CheckCircle2, ShieldAlert, Heart, Flame, Lock } from "lucide-react";
+import FAQAccordion from "../../components/FAQAccordion";
 
 const emergencyContacts = [
   { name: "Campus Security & Safety", phone: "+1 (555) 019-9111", icon: ShieldAlert, color: "text-red-600 dark:text-red-400", desc: "24/7 — Theft, trespass, physical security threats" },
@@ -176,6 +177,13 @@ export default function ContactPage() {
               </form>
             )}
           </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="border-t border-slate-200 dark:border-slate-800 pt-16">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Frequently Asked Questions</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">Quick answers to common queries about housing, scholarships, counselling, and campus life.</p>
+          <FAQAccordion />
         </section>
 
       </div>

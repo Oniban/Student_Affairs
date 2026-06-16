@@ -2,65 +2,52 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Sparkles, Trophy, Cpu, Users, Utensils, Dumbbell, ArrowRight } from "lucide-react";
+import { Landmark, Compass, CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
 
-const campusNodes = [
+const nodes = [
   {
     id: 1,
-    title: "Anwesha",
-    subtitle: "Annual Cultural Festival",
-    desc: "IIT Patna's annual cultural extravaganza. Anwesha features national-level competitions in music, dance, fashion, arts, and dramatics, hosting star nights and celebrating youth talent.",
-    href: "#anwesha",
-    icon: Sparkles,
-    imageLabel: "Anwesha Fest Image",
+    title: "About Student Affairs Office",
+    desc: "The primary bridge between the student body and university administration, promoting student success and extra-curricular personal growth.",
+    color: "from-orange-500 to-amber-500",
+    badgeColor: "bg-orange-100 text-orange-800 dark:bg-orange-950/40 dark:text-orange-400",
+    href: "/about",
+    icon: Landmark,
+    imageLabel: "Student Affairs Office",
   },
   {
     id: 2,
-    title: "Infinito",
-    subtitle: "Annual Sports Festival",
-    desc: "The premier inter-collegiate sports meet of IIT Patna. Infinito brings together top athletes from colleges across the region to compete in football, basketball, cricket, athletics, and chess.",
-    href: "#infinito",
-    icon: Trophy,
-    imageLabel: "Infinito Sports Fest Image",
+    title: "Vision and Mission",
+    desc: "Empowering students by supplying reliable health support, comfortable residential housing, and diverse extra-curricular engagement channels.",
+    color: "from-blue-500 to-indigo-500",
+    badgeColor: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400",
+    href: "/about#vision",
+    icon: Compass,
+    imageLabel: "Vision & Mission Core",
   },
   {
     id: 3,
-    title: "Celesta",
-    subtitle: "Annual Techno-Management Fest",
-    desc: "The technical and management festival showcasing cutting-edge tech innovations. Celesta hosts coding hackathons, robotics arenas, business pitches, and technical keynotes from industry experts.",
-    href: "#celesta",
-    icon: Cpu,
-    imageLabel: "Celesta Tech Fest Image",
+    title: "Key Responsibilities",
+    desc: "Managing hostel administration, psychological support services, student club charters, financial aid auditing, and grievance redressal.",
+    color: "from-pink-500 to-rose-500",
+    badgeColor: "bg-pink-100 text-pink-800 dark:bg-pink-950/40 dark:text-pink-400",
+    href: "/about#responsibilities",
+    icon: CheckCircle2,
+    imageLabel: "Core Responsibilities",
   },
   {
     id: 4,
-    title: "Clubs & Societies",
-    subtitle: "Student-Run Activities",
-    desc: "Active communities bridging technology, literature, arts, sports, and social service. Find your community and participate in weekly workshops, competitions, and collaborative projects.",
-    href: "/campus-life/clubs",
-    icon: Users,
-    imageLabel: "Clubs & Societies Directory",
-  },
-  {
-    id: 5,
-    title: "Campus Restaurants",
-    subtitle: "Bake O Mocha & Angeethi",
-    desc: "Our campus culinary hubs. Bake O Mocha serves freshly baked snacks, pastries, coffees, and light treats. Angeethi provides students with hearty, authentic Indian, Chinese, and regional food plates.",
-    href: "#restaurants",
-    icon: Utensils,
-    imageLabel: "Campus Dining Facilities",
-  },
-  {
-    id: 6,
-    title: "Gymkhana",
-    subtitle: "Students' Gymkhana",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
-    href: "#gymkhana",
-    icon: Dumbbell,
-    imageLabel: "Students Gymkhana Block",
+    title: "Major Initiatives",
+    desc: "Leading transformative programs in mental health (MindSpace), diversity (OneCampus), leadership (LeadNext), and green campaigns.",
+    color: "from-emerald-500 to-teal-500",
+    badgeColor: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400",
+    href: "/initiatives",
+    icon: Sparkles,
+    imageLabel: "Office Campaigns & Initiatives",
   },
 ];
 
+// Reusable Node Card Component for clean code reuse
 function NodeCard({ node, isHighlighted }) {
   const Icon = node.icon;
   return (
@@ -71,36 +58,30 @@ function NodeCard({ node, isHighlighted }) {
           : "bg-white/40 border-slate-100 dark:bg-slate-950/20 dark:border-slate-900/50 opacity-90"
       }`}
     >
-      {/* Yellow Image Block Placeholder */}
-      <div className="w-full h-40 rounded-lg bg-yellow-400 dark:bg-yellow-500/90 flex items-center justify-center mb-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25)_0%,transparent_60%)]" />
-        <Icon className="h-12 w-12 text-slate-900/90 drop-shadow-xs" />
-        <span className="absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-wider text-slate-900/70">
+      {/* Colored Image Block Placeholder */}
+      <div className={`w-full h-40 rounded-lg bg-gradient-to-br ${node.color} flex items-center justify-center mb-4 relative overflow-hidden`}>
+        <Icon className="h-12 w-12 text-white/95 drop-shadow-sm" />
+        <span className="absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-wider text-white/80">
           {node.imageLabel}
         </span>
       </div>
-      
-      <span className="inline-flex rounded-full bg-yellow-100 text-yellow-900 dark:bg-yellow-950/40 dark:text-yellow-400 px-2.5 py-0.5 text-xs font-bold mb-2.5">
-        {node.subtitle}
+      <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-bold ${node.badgeColor} mb-2.5`}>
+        Step {node.id}
       </span>
-      
       <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-amber-500 transition-colors">
         {node.title}
       </h3>
-      
       <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
         {node.desc}
       </p>
-      
       <span className="inline-flex items-center text-xs font-extrabold text-indigo-600 dark:text-amber-500 group-hover:underline">
-        {node.href.startsWith("/") ? "Open Directory" : "Learn More"}{" "}
-        <ArrowRight className="h-3.5 w-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+        Read More <ArrowRight className="h-3.5 w-3.5 ml-1 transition-transform group-hover:translate-x-1" />
       </span>
     </div>
   );
 }
 
-export default function CampusLifePage() {
+export default function ScrollPath() {
   const containerRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeNode, setActiveNode] = useState(1);
@@ -113,6 +94,7 @@ export default function CampusLifePage() {
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
+      // Start drawing when the section is near the middle of the viewport
       const startPoint = windowHeight * 0.75;
       const scrolled = startPoint - rect.top;
       const totalHeight = rect.height;
@@ -131,7 +113,7 @@ export default function CampusLifePage() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "-25% 0px -45% 0px",
+      rootMargin: "-25% 0px -45% 0px", // triggers when node is centered in viewport
       threshold: 0.1,
     };
 
@@ -154,32 +136,32 @@ export default function CampusLifePage() {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-slate-950 transition-colors py-12 sm:py-16">
+    <section id="about" className="relative py-24 sm:py-32 bg-slate-50 dark:bg-slate-900/30 transition-colors overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Page Header */}
-        <div className="border-b border-slate-200 pb-8 dark:border-slate-800 mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-amber-500">
-            Student Life
+        {/* Header Block */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <span className="inline-flex items-center rounded-full bg-indigo-50 px-3.5 py-1 text-xs font-bold text-indigo-700 dark:bg-indigo-950/40 dark:text-amber-500 mb-4 uppercase tracking-wider">
+            About Section
           </span>
-          <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-            Campus Life at IIT Patna
-          </h1>
-          <p className="mt-3 text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
-            From technical and cultural events that define academic years to student societies, food zones, and fitness complexes, explore the pathway of student life.
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            Navigating Student Affairs
+          </h2>
+          <p className="mt-4 text-base text-slate-600 dark:text-slate-400">
+            Scroll down or hover over the nodes along the pathway to explore our office structure, vision, primary administrative responsibilities, and welfare initiatives.
           </p>
         </div>
 
-        {/* Timeline Scroll-Path Container */}
-        <div ref={containerRef} className="relative mt-12 max-w-5xl mx-auto">
+        {/* Path and Nodes Container */}
+        <div ref={containerRef} className="relative mt-16 max-w-5xl mx-auto">
           
-          {/* Vertical Path Line */}
-          {/* Track */}
+          {/* Vertical Vector Path Line */}
+          {/* Gray Track */}
           <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-4 bottom-4 w-1 bg-slate-200 dark:bg-slate-800 rounded-full" />
           
-          {/* Growing Active Line */}
+          {/* Active Growing Path */}
           <div
-            className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-4 w-1 bg-gradient-to-b from-yellow-400 via-amber-500 to-indigo-600 rounded-full transition-all duration-300 ease-out origin-top"
+            className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-4 w-1 bg-gradient-to-b from-indigo-500 via-purple-500 to-amber-500 rounded-full transition-all duration-300 ease-out origin-top"
             style={{
               height: `${scrollProgress * 100}%`,
               maxHeight: "calc(100% - 32px)",
@@ -188,7 +170,7 @@ export default function CampusLifePage() {
 
           {/* Nodes List */}
           <div className="space-y-24 md:space-y-36 relative z-10">
-            {campusNodes.map((node, index) => {
+            {nodes.map((node, index) => {
               const isEven = index % 2 === 0;
               const isNodeActive = activeNode === node.id;
               const isNodeHovered = hoveredNode === node.id;
@@ -204,53 +186,53 @@ export default function CampusLifePage() {
                 >
                   <div className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] items-center gap-8 md:gap-0">
                     
-                    {/* Left Column (Desktop only, even index) */}
+                    {/* Left Column (Desktop only, displays card if index is even/0 or 2) */}
                     <div className="hidden md:block w-full text-right pr-12 md:order-1">
                       {isEven ? (
                         <Link href={node.href}>
                           <NodeCard node={node} isHighlighted={isHighlighted} />
                         </Link>
                       ) : (
-                        <div className="h-40 w-full" />
+                        <div className="h-40 w-full" /> /* Empty spacer to push timeline opposite side */
                       )}
                     </div>
 
-                    {/* Center Column: Circle (Visible always) */}
+                    {/* Center Column: Circle & line connector (Visible on both mobile & desktop) */}
                     <div className="flex items-center justify-center z-10 md:order-2 shrink-0">
                       <Link
                         href={node.href}
                         className={`h-8 w-8 rounded-full border-4 flex items-center justify-center transition-all duration-500 ${
                           isHighlighted
-                            ? "bg-yellow-400 border-white scale-125 shadow-md ring-4 ring-yellow-400/20 dark:bg-amber-500 dark:border-slate-900 dark:ring-amber-500/20"
+                            ? "bg-indigo-600 border-white scale-125 shadow-md ring-4 ring-indigo-500/20 dark:bg-amber-500 dark:border-slate-900 dark:ring-amber-500/20"
                             : "bg-slate-200 border-white dark:bg-slate-800 dark:border-slate-950"
                         }`}
                         aria-label={`Go to ${node.title}`}
                       >
                         <div
                           className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-                            isHighlighted ? "bg-slate-900" : "bg-slate-400 dark:bg-slate-600"
+                            isHighlighted ? "bg-white dark:bg-slate-900" : "bg-slate-400 dark:bg-slate-600"
                           }`}
                         />
                       </Link>
                     </div>
 
-                    {/* Right Column (Desktop: odd gets card. Mobile: always gets card) */}
+                    {/* Right Column (On desktop: even gets spacer, odd gets card. On mobile: always gets card) */}
                     <div className="w-full pl-0 md:pl-12 md:order-3">
-                      {/* Mobile card */}
+                      {/* Mobile view card (always visible below md breakpoint) */}
                       <div className="md:hidden block">
                         <Link href={node.href}>
                           <NodeCard node={node} isHighlighted={isHighlighted} />
                         </Link>
                       </div>
                       
-                      {/* Desktop card */}
+                      {/* Desktop view card (only visible if index is odd/1 or 3) */}
                       <div className="hidden md:block">
                         {!isEven ? (
                           <Link href={node.href}>
                             <NodeCard node={node} isHighlighted={isHighlighted} />
                           </Link>
                         ) : (
-                          <div className="h-40 w-full" />
+                          <div className="h-40 w-full" /> /* Empty spacer to push timeline opposite side */
                         )}
                       </div>
                     </div>
@@ -264,6 +246,6 @@ export default function CampusLifePage() {
         </div>
 
       </div>
-    </div>
+    </section>
   );
 }
