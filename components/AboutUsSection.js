@@ -16,6 +16,7 @@ import {
   ArrowRight,
   Zap,
   TrendingUp,
+  Shield,
 } from "lucide-react";
 import { motion, useScroll, useTransform, useInView, useSpring } from "framer-motion";
 
@@ -65,59 +66,59 @@ export default function AboutUsSection() {
     {
       icon: <Heart className="w-6 h-6" />,
       secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-      title: "Welfare & Counseling",
+      title: "About Student Affairs Office",
       description:
-        "Providing professional, confidential counseling services and wellness workshops to help students manage stress and academic pressures.",
+        "Providing comprehensive student support services that foster academic success, personal development, well-being, and an inclusive campus experience.",
       position: "left",
     },
-    {
-      icon: <Home className="w-6 h-6" />,
-      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-      title: "Hostel Administration",
-      description:
-        "Overseeing the allocation, maintenance, and student governance of all on-campus dormitories and residential complexes.",
-      position: "left",
-    },
+    // {
+    //   icon: <Home className="w-6 h-6" />,
+    //   secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
+    //   title: "Vision & Mission",
+    //   description:
+    //     "Overseeing the allocation, maintenance, and student governance of all on-campus dormitories and residential complexes.",
+    //   position: "left",
+    // },
     {
       icon: <Users className="w-6 h-6" />,
       secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-      title: "Activities & Clubs",
+      title: "Vision & Mission",
       description:
-        "Supervising club charters, annual funding distribution, student elections, and organizing large-scale intercollegiate events.",
+        "To cultivate a vibrant student community by empowering individuals through leadership opportunities, holistic development programs, and meaningful campus engagement.",
       position: "left",
     },
     {
-      icon: <Award className="w-6 h-6" />,
+      icon: <Shield className="w-6 h-6" />,
       secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-      title: "Financial Aid",
+      title: "Key Responsibilities",
       description:
-        "Facilitating student application submissions for institutional merit grants, need-based scholarships, and external bursaries.",
+        "Managing student welfare programs, scholarships, grievance redressal, disciplinary matters, student records, and coordination of extracurricular activities.",
       position: "right",
     },
+    // {
+    //   icon: <ShieldAlert className="w-6 h-6" />,
+    //   secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
+    //   title: "Grievance Redressal",
+    //   description:
+    //     "Maintaining code of conduct guidelines, addressing student disputes, and managing the anti-ragging compliance office.",
+    //   position: "right",
+    // },
     {
-      icon: <ShieldAlert className="w-6 h-6" />,
-      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-      title: "Grievance Redressal",
-      description:
-        "Maintaining code of conduct guidelines, addressing student disputes, and managing the anti-ragging compliance office.",
-      position: "right",
-    },
-    {
-      icon: <Trophy className="w-6 h-6" />,
+      icon: <Award className="w-6 h-6" />,
       secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-      title: "Sports & Fitness",
+      title: "Major Initiatives",
       description:
-        "Managing gymnasium operations, coordinating inter-varsity athletic meets, and supporting student fitness initiatives.",
+        "Organizing orientation programs, leadership workshops, wellness campaigns, cultural events, community outreach projects, and student development initiatives.",
       position: "right",
     },
   ];
 
-  const stats = [
-    { icon: <Users className="w-6 h-6" />, value: 5000, label: "Active Students", suffix: "+" },
-    { icon: <Home className="w-6 h-6" />, value: 10, label: "Hostel Blocks", suffix: "" },
-    { icon: <Calendar className="w-6 h-6" />, value: 18, label: "Years Legacy", suffix: "+" },
-    { icon: <TrendingUp className="w-6 h-6" />, value: 96, label: "Satisfaction Rate", suffix: "%" },
-  ];
+  // const stats = [
+  //   { icon: <Users className="w-6 h-6" />, value: 5000, label: "Active Students", suffix: "+" },
+  //   { icon: <Home className="w-6 h-6" />, value: 10, label: "Hostel Blocks", suffix: "" },
+  //   { icon: <Calendar className="w-6 h-6" />, value: 18, label: "Years Legacy", suffix: "+" },
+  //   { icon: <TrendingUp className="w-6 h-6" />, value: 96, label: "Satisfaction Rate", suffix: "%" },
+  // ];
 
   return (
     <section
@@ -174,8 +175,8 @@ export default function AboutUsSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Zap className="w-4 h-4" />
-            Discover Our Mission
+            {/* <Zap className="w-4 h-4" />
+            Discover Our Mission */}
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-black mb-4 text-center tracking-tight">
             About the Office
@@ -231,7 +232,7 @@ export default function AboutUsSection() {
                   className="w-full h-80 object-cover"
                 />
               </motion.div>
-              
+
               <motion.div
                 className="absolute inset-0 border-4 border-indigo-400/30 dark:border-[#3a5ba0]/40 rounded-2xl -m-3.5 z-[-1]"
                 initial={{ opacity: 0, scale: 1.1 }}
@@ -271,24 +272,6 @@ export default function AboutUsSection() {
         </div>
 
         {/* Stats Grid */}
-        <motion.div
-          ref={statsRef}
-          className="mt-24 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-          initial="hidden"
-          animate={isStatsInView ? "visible" : "hidden"}
-          variants={containerVariants}
-        >
-          {stats.map((stat, index) => (
-            <StatCounter
-              key={index}
-              icon={stat.icon}
-              value={stat.value}
-              label={stat.label}
-              suffix={stat.suffix}
-              delay={index * 0.1}
-            />
-          ))}
-        </motion.div>
 
         {/* CTA Block */}
         <motion.div
@@ -301,7 +284,7 @@ export default function AboutUsSection() {
             <h3 className="text-2xl font-black mb-1 text-slate-900 dark:text-white tracking-tight">Need assistance or have a grievance?</h3>
             <p className="text-slate-600 dark:text-slate-300 font-medium">Reach out directly to the respective department office coordinator.</p>
           </div>
-          
+
           <motion.a
             href="/contact"
             className="bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-[#3a5ba0] dark:hover:bg-[#3a5ba0]/90 px-6 py-3.5 rounded-xl flex items-center gap-2 font-bold transition-colors shadow-md text-sm shrink-0 cursor-pointer"
@@ -329,12 +312,12 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
           {icon}
           {secondaryIcon}
         </div>
-        
+
         <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white transition-colors duration-300">
           {title}
         </h3>
       </div>
-      
+
       <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
         {description}
       </p>
@@ -380,14 +363,14 @@ function StatCounter({ icon, value, label, suffix, delay }) {
       <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-slate-900 border border-indigo-100/50 dark:border-slate-800 flex items-center justify-center mb-4 text-indigo-600 dark:text-amber-500">
         {icon}
       </div>
-      
+
       <div ref={countRef} className="text-3xl font-black text-slate-900 dark:text-white flex items-center tracking-tight">
         <motion.span>{displayValue}</motion.span>
         <span>{suffix}</span>
       </div>
-      
+
       <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mt-1.5">{label}</p>
-      
+
       <div className="w-8 h-0.5 bg-indigo-600 dark:bg-amber-500 mt-3.5 rounded-full" />
     </motion.div>
   );
