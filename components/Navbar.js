@@ -1,124 +1,43 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Sun, Moon, Menu, X, Landmark, Megaphone, ArrowRight } from "lucide-react";
-import { useTheme } from "./ThemeProvider";
+import { Megaphone, ArrowRight } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
+import MinimalistDock from "./MinimalistDock";
+import FloatingActionMenu from "./FloatingActionMenu";
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const { theme, toggleTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const announcements = [
     "Annual Merit Scholarship Applications are open until June 30, 2026.",
     "Hostel Room Allocation list for the Fall Semester is now available under Resources.",
     "Mindfulness Circle sessions occur every Wednesday at 4:00 PM in the Counselling Center.",
   ];
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/#about" },
-    { name: "Campus Life", href: "/campus-life" },
-    { name: "Student Welfare", href: "/welfare" },
-    { name: "Team & Gallery", href: "/team" },
-    { name: "Resources & Support", href: "/resources" },
-    { name: "Contact (FAQ)", href: "/contact" },
-  ];
-
-  const isActive = (href) => {
-    if (href === "/") {
-      return pathname === "/";
-    }
-    if (href === "/#about") {
-      return false;
-    }
-    return pathname === href || (href !== "/" && pathname.startsWith(href));
-  };
-
-  const handleLinkClick = (e, href) => {
-    if (href === "/#about") {
-      if (pathname === "/") {
-        e.preventDefault();
-        const element = document.getElementById("about");
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-        setIsOpen(false);
-      }
-    } else {
-      setIsOpen(false);
-    }
-  };
-
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/90 transition-colors duration-200">
-      {/* Main Navbar */}
-      <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group shrink-0">
+      {/* Main Navbar Header */}
+      <div className="relative w-full flex h-16 items-center px-4 sm:px-6 lg:px-8">
+        {/* Logo — pinned to the far left */}
+        <Link href="/" className="flex items-center gap-2 group shrink-0 z-10">
           <img src="/logo.png" alt="IIT Patna Logo" className="h-7 w-auto object-contain" />
           <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">
             Student Affairs
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              className={`text-sm font-semibold transition-colors hover:text-indigo-600 dark:hover:text-amber-500 relative py-1 ${
-                isActive(link.href)
-                  ? "text-indigo-600 dark:text-amber-500"
-                  : "text-slate-600 dark:text-slate-300"
-              }`}
-            >
-              {link.name}
-              {isActive(link.href) && (
-                <span className="absolute bottom-0 left-0 h-0.5 w-full bg-indigo-600 dark:bg-amber-500" />
-              )}
-            </Link>
-          ))}
-        </nav>
+        {/* Navigation Dock — absolutely centered regardless of side widths */}
+        <div className="absolute left-1/2 -translate-x-1/2">
+          <MinimalistDock />
+        </div>
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-1 shrink-0">
-          {/* Hamburger Menu Toggle (immediately beside Theme Toggle on its left) */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden rounded-full p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white transition-colors cursor-pointer"
-            aria-label="Toggle mobile menu"
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-
-          {/* Theme Toggle (on the far right) */}
-          <button
-            onClick={toggleTheme}
-            className="rounded-full p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white transition-colors cursor-pointer"
-            aria-label="Toggle theme"
-          >
-            {mounted && theme === "dark" ? (
-              <Sun className="h-5 w-5 text-amber-500" />
-            ) : (
-              <Moon className="h-5 w-5 text-indigo-600" />
-            )}
-          </button>
+        {/* Theme Toggle — pinned to the far right */}
+        <div className="ml-auto flex items-center gap-1 shrink-0 z-10">
+          <ThemeToggle />
         </div>
       </div>
 
-      {/* Notices Ticker Banner (Below the Main Navbar) */}
       <div className="bg-indigo-50/80 border-t border-b border-indigo-100/50 py-2.5 dark:bg-indigo-950/40 dark:border-indigo-900/40 transition-colors">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between overflow-hidden">
+        <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between overflow-hidden">
           <div className="flex items-center gap-2 overflow-hidden flex-grow mr-4">
             {/* MegaPhone Icon & Notice text background overlay wrapper */}
             <div className="flex items-center gap-1.5 shrink-0 bg-indigo-50/95 dark:bg-slate-950/95 z-10 pr-2 transition-colors">
@@ -159,27 +78,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
-      {isOpen && (
-        <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 transition-colors duration-200">
-          <nav className="flex flex-col space-y-1 px-4 py-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className={`flex items-center rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                  isActive(link.href)
-                    ? "bg-slate-100 text-indigo-600 dark:bg-slate-900 dark:text-amber-500"
-                    : "text-slate-700 hover:bg-slate-50 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900/50 dark:hover:text-white"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      {/* Mobile Floating Action Menu */}
+      <FloatingActionMenu />
     </header>
   );
 }

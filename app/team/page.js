@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import FacultyDirectory from "../../components/FacultyDirectory";
-import InteractiveGallery from "../../components/InteractiveGallery";
+import CircularTestimonials from "../../components/CircularTestimonials";
 import { Users, Image } from "lucide-react";
 
 export default function TeamPage() {
@@ -60,7 +60,7 @@ export default function TeamPage() {
           {activeTab === "directory" ? (
             <FacultyDirectory />
           ) : (
-            <InteractiveGallery />
+            <CircularTestimonials />
           )}
         </div>
       </div>
