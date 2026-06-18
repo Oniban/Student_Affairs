@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Landmark, Compass, CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const nodes = [
   {
@@ -14,6 +15,7 @@ const nodes = [
     href: "/about",
     icon: Landmark,
     imageLabel: "Student Affairs Office",
+    image: "/student-affairs-office.png"
   },
   {
     id: 2,
@@ -24,6 +26,7 @@ const nodes = [
     href: "/about#vision",
     icon: Compass,
     imageLabel: "Vision & Mission Core",
+    image: "/vision.png"
   },
   {
     id: 3,
@@ -34,6 +37,7 @@ const nodes = [
     href: "/about#responsibilities",
     icon: CheckCircle2,
     imageLabel: "Core Responsibilities",
+    image: "/responsbilities.png"
   },
   {
     id: 4,
@@ -44,6 +48,7 @@ const nodes = [
     href: "/initiatives",
     icon: Sparkles,
     imageLabel: "Office Campaigns & Initiatives",
+    image: "/initatives.png"
   },
 ];
 
@@ -52,22 +57,34 @@ function NodeCard({ node, isHighlighted }) {
   const Icon = node.icon;
   return (
     <div
-      className={`group block text-left p-6 rounded-2xl border transition-all duration-300 ${
-        isHighlighted
-          ? "bg-white border-slate-200 shadow-md translate-y-[-4px] dark:bg-slate-900 dark:border-slate-800"
-          : "bg-white/40 border-slate-100 dark:bg-slate-950/20 dark:border-slate-900/50 opacity-90"
-      }`}
+      className={`group block text-left p-6 rounded-2xl border transition-all duration-300 ${isHighlighted
+        ? "bg-white border-slate-200 shadow-md translate-y-[-4px] dark:bg-slate-900 dark:border-slate-800"
+        : "bg-white/40 border-slate-100 dark:bg-slate-950/20 dark:border-slate-900/50 opacity-90"
+        }`}
     >
       {/* Colored Image Block Placeholder */}
-      <div className={`w-full h-40 rounded-lg bg-gradient-to-br ${node.color} flex items-center justify-center mb-4 relative overflow-hidden`}>
-        <Icon className="h-12 w-12 text-white/95 drop-shadow-sm" />
-        <span className="absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-wider text-white/80">
+      <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
+        <Image
+          src={node.image}
+          alt={node.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/30" />
+
+        {/* Icon on top
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Icon className="h-12 w-12 text-white drop-shadow-lg" />
+        </div> */}
+
+        {/* <span className="absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-wider text-white">
           {node.imageLabel}
-        </span>
+        </span> */}
       </div>
-      <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-bold ${node.badgeColor} mb-2.5`}>
+      {/* <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-bold ${node.badgeColor} mb-2.5`}>
         Step {node.id}
-      </span>
+      </span> */}
       <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-amber-500 transition-colors">
         {node.title}
       </h3>
@@ -138,27 +155,27 @@ export default function ScrollPath() {
   return (
     <section id="about" className="relative py-24 sm:py-32 bg-slate-50 dark:bg-slate-900/30 transition-colors overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header Block */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="inline-flex items-center rounded-full bg-indigo-50 px-3.5 py-1 text-xs font-bold text-indigo-700 dark:bg-indigo-950/40 dark:text-amber-500 mb-4 uppercase tracking-wider">
+          {/* <span className="inline-flex items-center rounded-full bg-indigo-50 px-3.5 py-1 text-xs font-bold text-indigo-700 dark:bg-indigo-950/40 dark:text-amber-500 mb-4 uppercase tracking-wider">
             About Section
-          </span>
+          </span> */}
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Navigating Student Affairs
           </h2>
           <p className="mt-4 text-base text-slate-600 dark:text-slate-400">
-            Scroll down or hover over the nodes along the pathway to explore our office structure, vision, primary administrative responsibilities, and welfare initiatives.
+            Scroll down along the pathway to explore our office structure, vision, primary administrative responsibilities, and welfare initiatives.
           </p>
         </div>
 
         {/* Path and Nodes Container */}
         <div ref={containerRef} className="relative mt-16 max-w-5xl mx-auto">
-          
+
           {/* Vertical Vector Path Line */}
           {/* Gray Track */}
           <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-4 bottom-4 w-1 bg-slate-200 dark:bg-slate-800 rounded-full" />
-          
+
           {/* Active Growing Path */}
           <div
             className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-4 w-1 bg-gradient-to-b from-indigo-500 via-purple-500 to-amber-500 rounded-full transition-all duration-300 ease-out origin-top"
@@ -185,7 +202,7 @@ export default function ScrollPath() {
                   onMouseLeave={() => setHoveredNode(null)}
                 >
                   <div className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] items-center gap-8 md:gap-0">
-                    
+
                     {/* Left Column (Desktop only, displays card if index is even/0 or 2) */}
                     <div className="hidden md:block w-full text-right pr-12 md:order-1">
                       {isEven ? (
@@ -201,17 +218,15 @@ export default function ScrollPath() {
                     <div className="flex items-center justify-center z-10 md:order-2 shrink-0">
                       <Link
                         href={node.href}
-                        className={`h-8 w-8 rounded-full border-4 flex items-center justify-center transition-all duration-500 ${
-                          isHighlighted
-                            ? "bg-indigo-600 border-white scale-125 shadow-md ring-4 ring-indigo-500/20 dark:bg-amber-500 dark:border-slate-900 dark:ring-amber-500/20"
-                            : "bg-slate-200 border-white dark:bg-slate-800 dark:border-slate-950"
-                        }`}
+                        className={`h-8 w-8 rounded-full border-4 flex items-center justify-center transition-all duration-500 ${isHighlighted
+                          ? "bg-indigo-600 border-white scale-125 shadow-md ring-4 ring-indigo-500/20 dark:bg-amber-500 dark:border-slate-900 dark:ring-amber-500/20"
+                          : "bg-slate-200 border-white dark:bg-slate-800 dark:border-slate-950"
+                          }`}
                         aria-label={`Go to ${node.title}`}
                       >
                         <div
-                          className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-                            isHighlighted ? "bg-white dark:bg-slate-900" : "bg-slate-400 dark:bg-slate-600"
-                          }`}
+                          className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${isHighlighted ? "bg-white dark:bg-slate-900" : "bg-slate-400 dark:bg-slate-600"
+                            }`}
                         />
                       </Link>
                     </div>
@@ -224,7 +239,7 @@ export default function ScrollPath() {
                           <NodeCard node={node} isHighlighted={isHighlighted} />
                         </Link>
                       </div>
-                      
+
                       {/* Desktop view card (only visible if index is odd/1 or 3) */}
                       <div className="hidden md:block">
                         {!isEven ? (
