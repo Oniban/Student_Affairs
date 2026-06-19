@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Sparkles, Trophy, Cpu, Users, Utensils, Dumbbell, ArrowRight } from "lucide-react";
+import { ScrollVelocity } from "@/components/ui/scroll-velocity";
 
 const campusNodes = [
   {
@@ -61,18 +61,13 @@ const campusNodes = [
   },
 ];
 
-function NodeCard({ node, isHighlighted }) {
+function NodeCard({ node }) {
   const Icon = node.icon;
   return (
     <div
-      className={`group block text-left p-6 rounded-2xl border transition-all duration-300 ${
-        isHighlighted
-          ? "bg-white border-slate-200 shadow-md translate-y-[-4px] dark:bg-slate-900 dark:border-slate-800"
-          : "bg-white/40 border-slate-100 dark:bg-slate-950/20 dark:border-slate-900/50 opacity-90"
-      }`}
+      className="group block h-full w-[20rem] text-left rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 sm:w-[24rem]"
     >
-      {/* Yellow Image Block Placeholder */}
-      <div className="w-full h-40 rounded-lg bg-yellow-400 dark:bg-yellow-500/90 flex items-center justify-center mb-4 relative overflow-hidden">
+      <div className="relative mb-4 flex h-36 w-full items-center justify-center overflow-hidden rounded-lg bg-yellow-400 dark:bg-yellow-500/90">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25)_0%,transparent_60%)]" />
         <Icon className="h-12 w-12 text-slate-900/90 drop-shadow-xs" />
         <span className="absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-wider text-slate-900/70">
@@ -101,57 +96,10 @@ function NodeCard({ node, isHighlighted }) {
 }
 
 export default function CampusLifePage() {
-  const containerRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeNode, setActiveNode] = useState(1);
-  const [hoveredNode, setHoveredNode] = useState(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const container = containerRef.current;
-      const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const startPoint = windowHeight * 0.75;
-      const scrolled = startPoint - rect.top;
-      const totalHeight = rect.height;
-
-      let percentage = scrolled / (totalHeight - windowHeight * 0.2);
-      percentage = Math.max(0, Math.min(1, percentage));
-      setScrollProgress(percentage);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-25% 0px -45% 0px",
-      threshold: 0.1,
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = parseInt(entry.target.getAttribute("data-node-id"), 10);
-          setActiveNode(id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const elements = document.querySelectorAll("[data-node-id]");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
+  const velocityRows = [
+    { velocity: 3, nodes: campusNodes },
+    { velocity: -3, nodes: [...campusNodes].reverse() },
+  ];
 
   return (
     <div className="bg-white dark:bg-slate-950 transition-colors py-12 sm:py-16">
@@ -170,97 +118,26 @@ export default function CampusLifePage() {
           </p>
         </div>
 
-        {/* Timeline Scroll-Path Container */}
-        <div ref={containerRef} className="relative mt-12 max-w-5xl mx-auto">
-          
-          {/* Vertical Path Line */}
-          {/* Track */}
-          <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-4 bottom-4 w-1 bg-slate-200 dark:bg-slate-800 rounded-full" />
-          
-          {/* Growing Active Line */}
-          <div
-            className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-4 w-1 bg-gradient-to-b from-yellow-400 via-amber-500 to-indigo-600 rounded-full transition-all duration-300 ease-out origin-top"
-            style={{
-              height: `${scrollProgress * 100}%`,
-              maxHeight: "calc(100% - 32px)",
-            }}
-          />
-
-          {/* Nodes List */}
-          <div className="space-y-24 md:space-y-36 relative z-10">
-            {campusNodes.map((node, index) => {
-              const isEven = index % 2 === 0;
-              const isNodeActive = activeNode === node.id;
-              const isNodeHovered = hoveredNode === node.id;
-              const isHighlighted = isNodeActive || isNodeHovered;
-
-              return (
-                <div
-                  key={node.id}
-                  data-node-id={node.id}
-                  className="relative"
-                  onMouseEnter={() => setHoveredNode(node.id)}
-                  onMouseLeave={() => setHoveredNode(null)}
-                >
-                  <div className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] items-center gap-8 md:gap-0">
-                    
-                    {/* Left Column (Desktop only, even index) */}
-                    <div className="hidden md:block w-full text-right pr-12 md:order-1">
-                      {isEven ? (
-                        <Link href={node.href}>
-                          <NodeCard node={node} isHighlighted={isHighlighted} />
-                        </Link>
-                      ) : (
-                        <div className="h-40 w-full" />
-                      )}
-                    </div>
-
-                    {/* Center Column: Circle (Visible always) */}
-                    <div className="flex items-center justify-center z-10 md:order-2 shrink-0">
-                      <Link
-                        href={node.href}
-                        className={`h-8 w-8 rounded-full border-4 flex items-center justify-center transition-all duration-500 ${
-                          isHighlighted
-                            ? "bg-yellow-400 border-white scale-125 shadow-md ring-4 ring-yellow-400/20 dark:bg-amber-500 dark:border-slate-900 dark:ring-amber-500/20"
-                            : "bg-slate-200 border-white dark:bg-slate-800 dark:border-slate-950"
-                        }`}
-                        aria-label={`Go to ${node.title}`}
-                      >
-                        <div
-                          className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-                            isHighlighted ? "bg-slate-900" : "bg-slate-400 dark:bg-slate-600"
-                          }`}
-                        />
-                      </Link>
-                    </div>
-
-                    {/* Right Column (Desktop: odd gets card. Mobile: always gets card) */}
-                    <div className="w-full pl-0 md:pl-12 md:order-3">
-                      {/* Mobile card */}
-                      <div className="md:hidden block">
-                        <Link href={node.href}>
-                          <NodeCard node={node} isHighlighted={isHighlighted} />
-                        </Link>
-                      </div>
-                      
-                      {/* Desktop card */}
-                      <div className="hidden md:block">
-                        {!isEven ? (
-                          <Link href={node.href}>
-                            <NodeCard node={node} isHighlighted={isHighlighted} />
-                          </Link>
-                        ) : (
-                          <div className="h-40 w-full" />
-                        )}
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              );
-            })}
+        <div className="relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden border-y border-slate-200 bg-slate-50 py-10 dark:border-slate-800 dark:bg-slate-900/40">
+          <div className="space-y-6">
+            {velocityRows.map((row, rowIndex) => (
+              <ScrollVelocity
+                key={row.velocity}
+                velocity={row.velocity}
+                className={rowIndex === 1 ? "opacity-95" : ""}
+              >
+                {[...row.nodes, ...row.nodes].map((node, index) => (
+                  <Link
+                    key={`${row.velocity}-${node.id}-${index}`}
+                    href={node.href}
+                    className="normal-case tracking-normal leading-normal"
+                  >
+                    <NodeCard node={node} />
+                  </Link>
+                ))}
+              </ScrollVelocity>
+            ))}
           </div>
-
         </div>
 
       </div>

@@ -1,24 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, AlertCircle, CheckCircle2, ShieldAlert, Heart, Flame, Lock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, AlertCircle, CheckCircle2, ShieldAlert, Heart, Users, GraduationCap } from "lucide-react";
 import FAQAccordion from "../../components/FAQAccordion";
 
 const emergencyContacts = [
-  { name: "Campus Security & Safety", phone: "+1 (555) 019-9111", icon: ShieldAlert, color: "text-red-600 dark:text-red-400", desc: "24/7 — Theft, trespass, physical security threats" },
-  { name: "Student Health Emergency", phone: "+1 (555) 019-9222", icon: Heart, color: "text-rose-600 dark:text-rose-400", desc: "Medical emergencies, first aid, ambulance coordination" },
-  { name: "Mental Health Helpline (MindSpace)", phone: "+1 (555) 019-9888", icon: AlertCircle, color: "text-purple-600 dark:text-purple-400", desc: "24/7 — Crisis counseling, severe distress, suicide prevention" },
-  { name: "Fire Safety & Civil Services", phone: "+1 (555) 019-9119", icon: Flame, color: "text-orange-600 dark:text-orange-400", desc: "Fire alarms, gas leaks, evacuation coordination" },
-  { name: "Anti-Ragging Helpline", phone: "+1 (555) 019-9300", icon: Lock, color: "text-amber-600 dark:text-amber-400", desc: "Report ragging incidents anonymously, 24 hours a day" },
+  { name: "SWB GenSec", phone: "7017172124", icon: ShieldAlert, color: "text-red-600 dark:text-red-400", desc: "General Student Welfare Board contact" },
+  { name: "UG Girls", phone: "7667359694", icon: Heart, color: "text-rose-600 dark:text-rose-400", desc: "Student welfare contact for UG girls" },
+  { name: "Sophomore Year Boys", phone: "7013251064", icon: Users, color: "text-indigo-600 dark:text-indigo-400", desc: "Student welfare contact for sophomore year boys" },
+  { name: "Junior Year Boys", phone: "6281158553", icon: GraduationCap, color: "text-amber-600 dark:text-amber-400", desc: "Student welfare contact for junior year boys" },
 ];
 
 const departments = [
-  { dept: "Dean of Student Welfare", email: "sjenkins@university.edu", phone: "+1 (555) 019-9011" },
-  { dept: "Hostel & Residential Affairs", email: "hostel@university.edu", phone: "+1 (555) 019-9022" },
-  { dept: "Counseling & Psych Services", email: "counseling@university.edu", phone: "+1 (555) 019-9033" },
-  { dept: "Scholarships & Financial Aid", email: "scholarships@university.edu", phone: "+1 (555) 019-9055" },
-  { dept: "Student Clubs & Activities", email: "clubs@university.edu", phone: "+1 (555) 019-9066" },
-  { dept: "Sports & Physical Education", email: "sports@university.edu", phone: "+1 (555) 019-9044" },
+  { dept: "SWB GenSec", email: "swb@iitp.ac.in", phone: "7017172124" },
+  { dept: "UG Girls", email: "swb@iitp.ac.in", phone: "7667359694" },
+  { dept: "Sophomore Year Boys", email: "swb@iitp.ac.in", phone: "7013251064" },
+  { dept: "Junior Year Boys", email: "swb@iitp.ac.in", phone: "6281158553" },
 ];
 
 export default function ContactPage() {
@@ -47,9 +44,9 @@ export default function ContactPage() {
         <section id="emergency">
           <div className="flex items-center gap-2.5 mb-5">
             <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400" />
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Emergency Contacts</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">SWB Contacts</h2>
           </div>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">All lines are active 24 hours a day, 7 days a week. Save these numbers before you need them.</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">Student Welfare Board contacts from the official phone list.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {emergencyContacts.map((ec) => {
               const Icon = ec.icon;
@@ -64,6 +61,12 @@ export default function ContactPage() {
                     <a href={`tel:${ec.phone.replace(/[^0-9+]/g, "")}`} className="text-base font-bold text-red-700 dark:text-red-400 hover:underline">
                       {ec.phone}
                     </a>
+                    <a
+                      href={`https://wa.me/91${ec.phone.replace(/[^0-9]/g, "")}`}
+                      className="ml-3 text-xs font-bold text-emerald-600 hover:underline dark:text-emerald-400"
+                    >
+                      WhatsApp
+                    </a>
                   </div>
                 </div>
               );
@@ -76,7 +79,7 @@ export default function ContactPage() {
           {/* Departmental Directory */}
           <div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Departmental Directory</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-5">Contact specific departments for targeted assistance.</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-5">Use these phone numbers for Student Welfare Board assistance.</p>
             <div className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
               <table className="w-full text-sm">
                 <thead>
@@ -128,7 +131,7 @@ export default function ContactPage() {
               <div className="p-5 space-y-2.5 bg-white dark:bg-slate-900/40">
                 <div className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                   <MapPin className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
-                  <span>Administration Block, Room 102, University Campus, Sector 4, City — 110 004</span>
+                  <span>Administration Block, IIT Patna Campus, Bihta, Bihar</span>
                 </div>
                 <div className="flex items-center gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                   <Clock className="h-4 w-4 text-slate-400 shrink-0" />
@@ -136,11 +139,11 @@ export default function ContactPage() {
                 </div>
                 <div className="flex items-center gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                   <Phone className="h-4 w-4 text-slate-400 shrink-0" />
-                  <a href="tel:+15550199000" className="text-indigo-600 dark:text-amber-500 hover:underline">+1 (555) 019-9000</a>
+                  <a href="tel:7017172124" className="text-indigo-600 dark:text-amber-500 hover:underline">7017172124</a>
                 </div>
                 <div className="flex items-center gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                   <Mail className="h-4 w-4 text-slate-400 shrink-0" />
-                  <a href="mailto:studentaffairs@university.edu" className="text-indigo-600 dark:text-amber-500 hover:underline">studentaffairs@university.edu</a>
+                  <a href="mailto:swb@iitp.ac.in" className="text-indigo-600 dark:text-amber-500 hover:underline">swb@iitp.ac.in</a>
                 </div>
               </div>
             </div>

@@ -1,10 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { Megaphone, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Compass,
+  HelpCircle,
+  Home,
+  Landmark,
+  Megaphone,
+  Users,
+} from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import MinimalistDock from "./MinimalistDock";
-import FloatingActionMenu from "./FloatingActionMenu";
+import { NavBar } from "@/components/ui/tubelight-navbar";
+
+const navItems = [
+  { name: "Home", url: "/", icon: Home },
+  { name: "About Us", url: "/#about", icon: Landmark },
+  { name: "Campus Life", url: "/campus-life", icon: Compass },
+  { name: "Team & Gallery", url: "/team", icon: Users },
+  { name: "Resources", url: "/resources", icon: BookOpen },
+  { name: "Contact & FAQ", url: "/contact", icon: HelpCircle },
+];
 
 export default function Navbar() {
   const announcements = [
@@ -25,9 +42,8 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Navigation Dock — absolutely centered regardless of side widths */}
         <div className="absolute left-1/2 -translate-x-1/2">
-          <MinimalistDock />
+          <NavBar items={navItems} />
         </div>
 
         {/* Theme Toggle — pinned to the far right */}
@@ -77,9 +93,6 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-
-      {/* Mobile Floating Action Menu */}
-      <FloatingActionMenu />
     </header>
   );
 }

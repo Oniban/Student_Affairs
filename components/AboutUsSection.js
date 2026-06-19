@@ -1,23 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Heart,
-  Home,
-  Users,
-  Award,
-  ShieldAlert,
-  Trophy,
-  Activity,
-  Calendar,
-  CheckCircle,
-  Sparkles,
-  Star,
-  ArrowRight,
-  Zap,
-  TrendingUp,
-  Shield,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useScroll, useTransform, useInView, useSpring } from "framer-motion";
 
 export default function AboutUsSection() {
@@ -64,48 +48,24 @@ export default function AboutUsSection() {
 
   const services = [
     {
-      icon: <Heart className="w-6 h-6" />,
-      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
       title: "About Student Affairs Office",
       description:
         "Providing comprehensive student support services that foster academic success, personal development, well-being, and an inclusive campus experience.",
       position: "left",
     },
-    // {
-    //   icon: <Home className="w-6 h-6" />,
-    //   secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-    //   title: "Vision & Mission",
-    //   description:
-    //     "Overseeing the allocation, maintenance, and student governance of all on-campus dormitories and residential complexes.",
-    //   position: "left",
-    // },
     {
-      icon: <Users className="w-6 h-6" />,
-      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
       title: "Vision & Mission",
       description:
         "To cultivate a vibrant student community by empowering individuals through leadership opportunities, holistic development programs, and meaningful campus engagement.",
       position: "left",
     },
     {
-      icon: <Shield className="w-6 h-6" />,
-      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
       title: "Key Responsibilities",
       description:
         "Managing student welfare programs, scholarships, grievance redressal, disciplinary matters, student records, and coordination of extracurricular activities.",
       position: "right",
     },
-    // {
-    //   icon: <ShieldAlert className="w-6 h-6" />,
-    //   secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
-    //   title: "Grievance Redressal",
-    //   description:
-    //     "Maintaining code of conduct guidelines, addressing student disputes, and managing the anti-ragging compliance office.",
-    //   position: "right",
-    // },
     {
-      icon: <Award className="w-6 h-6" />,
-      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-indigo-400 dark:text-amber-400" />,
       title: "Major Initiatives",
       description:
         "Organizing orientation programs, leadership workshops, wellness campaigns, cultural events, community outreach projects, and student development initiatives.",
@@ -205,13 +165,10 @@ export default function AboutUsSection() {
               .map((service, index) => (
                 <ServiceItem
                   key={`left-${index}`}
-                  icon={service.icon}
-                  secondaryIcon={service.secondaryIcon}
                   title={service.title}
                   description={service.description}
                   variants={itemVariants}
                   delay={index * 0.15}
-                  direction="left"
                 />
               ))}
           </div>
@@ -259,13 +216,10 @@ export default function AboutUsSection() {
               .map((service, index) => (
                 <ServiceItem
                   key={`right-${index}`}
-                  icon={service.icon}
-                  secondaryIcon={service.secondaryIcon}
                   title={service.title}
                   description={service.description}
                   variants={itemVariants}
                   delay={index * 0.15}
-                  direction="right"
                 />
               ))}
           </div>
@@ -299,7 +253,7 @@ export default function AboutUsSection() {
   );
 }
 
-function ServiceItem({ icon, secondaryIcon, title, description, variants, delay, direction }) {
+function ServiceItem({ title, description, variants, delay }) {
   return (
     <motion.div
       className="flex flex-col group text-left"
@@ -307,16 +261,9 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
       transition={{ delay }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
-      <div className="flex items-center gap-3.5 mb-2.5">
-        <div className="text-indigo-600 dark:text-amber-500 bg-indigo-50 dark:bg-slate-900 p-2.5 rounded-xl border border-indigo-100/50 dark:border-slate-800 transition-colors group-hover:bg-indigo-600 group-hover:text-white dark:group-hover:bg-[#3a5ba0] dark:group-hover:text-white relative">
-          {icon}
-          {secondaryIcon}
-        </div>
-
-        <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white transition-colors duration-300">
-          {title}
-        </h3>
-      </div>
+      <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white mb-2">
+        {title}
+      </h3>
 
       <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
         {description}
@@ -324,7 +271,6 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
     </motion.div>
   );
 }
-
 function StatCounter({ icon, value, label, suffix, delay }) {
   const countRef = useRef(null);
   const isInView = useInView(countRef, { once: false });
