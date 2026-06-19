@@ -27,9 +27,12 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const announcements = [
-    "Annual Merit Scholarship Applications are open until June 30, 2026.",
-    "Hostel Room Allocation list for the Fall Semester is now available under Resources.",
-    "Mindfulness Circle sessions occur every Wednesday at 4:00 PM in the Counselling Center.",
+    "Dummy Announcement 1",
+    "Dummy Announcement 2",
+    "Dummy Announcement 3",
+    "Dummy Announcement 4",
+    "Dummy Announcement 5",
+    "Dummy Announcement 6"
   ];
 
   const dynamicNavItems = navItems.map((item) => {
@@ -74,7 +77,7 @@ export default function Navbar() {
                 Notice:
               </span>
             </div>
-            
+
             {/* Isolated sliding marquee track */}
             <div className="relative overflow-hidden w-full py-0.5">
               <div className="flex animate-marquee gap-12 text-xs text-indigo-900 dark:text-indigo-200">
@@ -96,9 +99,9 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          
-          <Link 
-            href="/resources" 
+
+          <Link
+            href="/resources"
             className="text-xs font-bold text-indigo-600 hover:text-indigo-800 dark:text-amber-500 dark:hover:text-amber-400 shrink-0 flex items-center gap-1 ml-4 transition-colors"
           >
             All Notices <ArrowRight className="h-3 w-3" />

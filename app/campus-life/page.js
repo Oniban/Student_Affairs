@@ -75,9 +75,11 @@ export default function CampusLifePage() {
 
         {/* Campus Gallery */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h1 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+
+          <h1 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
             Campus Gallery
           </h1>
+          <div className="mt-4 mx-auto h-1 w-20 rounded-full bg-gradient-to-r from-indigo-500 to-amber-400 dark:from-amber-300 dark:to-yellow-500" />
         </div>
 
         <div className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden flex flex-col gap-6 py-4 bg-slate-50/50 dark:bg-slate-900/10">
