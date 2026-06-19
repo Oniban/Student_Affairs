@@ -12,7 +12,7 @@ export default function FloatingActionMenu() {
 
   const menuItems = [
     { label: "Home", href: "/", icon: <Home size={18} /> },
-    { label: "About Us", href: "/#about", icon: <Landmark size={18} /> },
+    { label: "About Us", href: pathname === "/" ? "/#about" : "/about", icon: <Landmark size={18} /> },
     { label: "Campus Life", href: "/campus-life", icon: <Compass size={18} /> },
     { label: "Welfare", href: "/welfare", icon: <Heart size={18} /> },
     { label: "Team & Gallery", href: "/team", icon: <Users size={18} /> },
@@ -24,14 +24,10 @@ export default function FloatingActionMenu() {
 
   const handleItemClick = (e, item) => {
     setIsOpen(false);
-    if (item.href === "/#about") {
-      if (pathname === "/") {
-        e.preventDefault();
-        const event = new CustomEvent("scrollToAbout");
-        window.dispatchEvent(event);
-      } else {
-        router.push("/#about");
-      }
+    if (item.href === "/#about" && pathname === "/") {
+      e.preventDefault();
+      const event = new CustomEvent("scrollToAbout");
+      window.dispatchEvent(event);
     } else {
       router.push(item.href);
     }
@@ -53,8 +49,7 @@ export default function FloatingActionMenu() {
               const active =
                 item.href === "/"
                   ? pathname === "/"
-                  : item.href !== "/#about" &&
-                    (pathname === item.href || pathname.startsWith(item.href));
+                  : pathname === item.href || pathname.startsWith(item.href);
 
               return (
                 <motion.button

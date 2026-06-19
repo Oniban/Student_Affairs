@@ -13,7 +13,7 @@ export default function MinimalistDock() {
 
   const dockItems = [
     { id: "home", icon: <Home size={16} />, label: "Home", href: "/" },
-    { id: "about", icon: <Landmark size={16} />, label: "About Us", href: "/#about" },
+    { id: "about", icon: <Landmark size={16} />, label: "About Us", href: pathname === "/" ? "/#about" : "/about" },
     { id: "campus-life", icon: <Compass size={16} />, label: "Campus Life", href: "/campus-life" },
     { id: "welfare", icon: <Heart size={16} />, label: "Welfare", href: "/welfare" },
     { id: "team", icon: <Users size={16} />, label: "Team & Gallery", href: "/team" },
@@ -28,14 +28,10 @@ export default function MinimalistDock() {
   };
 
   const handleLinkClick = (e, item) => {
-    if (item.href === "/#about") {
-      if (pathname === "/") {
-        e.preventDefault();
-        const event = new CustomEvent("scrollToAbout");
-        window.dispatchEvent(event);
-      } else {
-        router.push("/#about");
-      }
+    if (item.href === "/#about" && pathname === "/") {
+      e.preventDefault();
+      const event = new CustomEvent("scrollToAbout");
+      window.dispatchEvent(event);
     }
   };
 

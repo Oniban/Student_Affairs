@@ -11,6 +11,7 @@ import {
   Megaphone,
   Users,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { NavBar } from "@/components/ui/tubelight-navbar";
 
@@ -24,11 +25,22 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const announcements = [
     "Annual Merit Scholarship Applications are open until June 30, 2026.",
     "Hostel Room Allocation list for the Fall Semester is now available under Resources.",
     "Mindfulness Circle sessions occur every Wednesday at 4:00 PM in the Counselling Center.",
   ];
+
+  const dynamicNavItems = navItems.map((item) => {
+    if (item.name === "About Us") {
+      return {
+        ...item,
+        url: pathname === "/" ? "/#about" : "/about",
+      };
+    }
+    return item;
+  });
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/90 transition-colors duration-200">
@@ -43,7 +55,7 @@ export default function Navbar() {
         </Link>
 
         <div className="absolute left-1/2 -translate-x-1/2">
-          <NavBar items={navItems} />
+          <NavBar items={dynamicNavItems} />
         </div>
 
         {/* Theme Toggle — pinned to the far right */}

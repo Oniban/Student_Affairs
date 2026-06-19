@@ -245,7 +245,7 @@ export default function FacultyDirectory() {
               </div>
               <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-0.5">{f.name}</h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">{f.role}</p>
-              <span className="inline-block mb-4 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-600 dark:text-slate-400">
+              <span className="inline-block mb-4 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-600 dark:text-slate-400 w-fit">
                 {f.category}
               </span>
               <div className="mt-auto space-y-1.5 text-xs text-slate-500 dark:text-slate-400">

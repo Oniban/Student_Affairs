@@ -34,7 +34,13 @@ export function NavBar({
             <Link
               key={item.name}
               href={item.url}
-              onClick={() => setActiveTab(item.name)}
+              onClick={(e) => {
+                setActiveTab(item.name);
+                if (item.url.includes("#about") && pathname === "/") {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("scrollToAbout"));
+                }
+              }}
               className={cn(
                 "relative cursor-pointer rounded-full px-3 py-1.5 text-xs font-semibold transition-colors lg:px-4",
                 "text-foreground/80 hover:text-primary",

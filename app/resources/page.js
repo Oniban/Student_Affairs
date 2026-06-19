@@ -21,18 +21,34 @@ export const metadata = {
 
 const workbookUrl = "/Students%27%20Welfare%20Board.xlsx";
 
+// Once you upload the Excel workbook to Google Drive and open it in Google Sheets,
+// paste the URL here. Example: "https://docs.google.com/spreadsheets/d/1A2B3C4D5E6F7G8H9I0J"
+// (Leave it empty to download the local file as fallback)
+const googleSheetsBaseUrl = "";
+
+const getSheetUrl = (sheet) => {
+  if (googleSheetsBaseUrl) {
+    // strip trailing /edit or edit#gid=... to form a clean base
+    const cleanBase = googleSheetsBaseUrl.split("/edit")[0];
+    return `${cleanBase}/edit#gid=${sheet.gid || '0'}`;
+  }
+  return workbookUrl;
+};
+
 const workbookSheets = [
   {
     title: "Index",
     rows: 21,
     columns: 2,
     preview: ["What will you find here?", "Emergency Contacts", "Bus Service Updates", "Gymkhana Team Details"],
+    gid: "0",
   },
   {
     title: "Emergency Contacts",
     rows: 71,
     columns: 3,
     preview: ["IITP Hospital Helpline Numbers 24x7", "Ambulance | 9264193927", "Apollo Pharmacy | 7605035992"],
+    gid: "replace_with_emergency_contacts_gid",
   },
   {
     title: "Bus Services",
@@ -43,78 +59,91 @@ const workbookSheets = [
       "Use the sheet for schedule updates",
       "Questions: swb@iitp.ac.in",
     ],
+    gid: "replace_with_bus_services_gid",
   },
   {
     title: "Sheet45",
     rows: 0,
     columns: 0,
     preview: ["No populated cells found in this workbook tab."],
+    gid: "replace_with_sheet45_gid",
   },
   {
     title: "Sheet44",
     rows: 0,
     columns: 0,
     preview: ["No populated cells found in this workbook tab."],
+    gid: "replace_with_sheet44_gid",
   },
   {
     title: "Gymkhana Team",
     rows: 61,
     columns: 6,
     preview: ["Students' Gymkhana 2025-26", "Position | Name | Roll No | Council Mailing ID", "Vice President | Anirudh Singh"],
+    gid: "replace_with_gymkhana_team_gid",
   },
   {
     title: "Social Media Handles",
     rows: 26,
     columns: 12,
     preview: ["IIT Patna, Students' Gymkhana, Student Life IITP", "Fests: Anwesha, Celesta, Infinito", "Clubs and councils"],
+    gid: "replace_with_social_media_gid",
   },
   {
     title: "NSS TEAM 24-25",
     rows: 16,
     columns: 6,
     preview: ["National Service Scheme Team 2024-25", "Position | Name | Roll No | Council Mailing ID", "Pic NSS | Ranjeet Ranjan Sir"],
+    gid: "replace_with_nss_team_gid",
   },
   {
     title: "Hotels nearby",
     rows: 26,
     columns: 3,
     preview: ["The Panache near Gandhi Maidan", "Hotel Maurya near Gandhi Maidan", "Hotel Chanakya, Bir Chand Patel Marg"],
+    gid: "replace_with_hotels_nearby_gid",
   },
   {
     title: "Selling Items",
     rows: 102,
     columns: 9,
     preview: ["Timestamp | Email | Name | Roll no.", "Current status: FOR SALE / SOLD OUT", "Items, reference pictures, comments"],
+    gid: "replace_with_selling_items_gid",
   },
   {
     title: "Sheet33",
     rows: 234,
     columns: 24,
     preview: ["Bus 02, Bus 03, Bus 01, Institute Bus", "Driver and conductor contacts", "Departure time | From | To"],
+    gid: "replace_with_sheet33_gid",
   },
   {
     title: "Sheet43",
     rows: 95,
     columns: 26,
     preview: ["Bus 01, Bus 02, Bus 03 schedules", "Driver contacts", "Departure time | From | To"],
+    gid: "replace_with_sheet43_gid",
   },
   {
     title: "Tagging Slot",
     rows: 80,
     columns: 23,
     preview: ["Self-declaration verification instructions", "Slot number, venue, count, date, time", "Bring ID card and invoice if available"],
+    gid: "replace_with_tagging_slot_gid",
   },
   {
     title: "B. Tech. 22 Tagging Slot",
     rows: 42,
     columns: 23,
     preview: ["B.Tech 2022 tagging instructions", "Slot number, count, date, time", "Bring ID card and invoice copies"],
+    gid: "replace_with_btech22_tagging_slot_gid",
   },
   {
     title: "Lost & Found",
     rows: 24,
     columns: 9,
     preview: ["Timestamp | Lost or Found | Roll No. | Contact No.", "Item specifications and photos", "Lost/found date and remarks"],
+    gid: "replace_with_lost_found_gid",
   },
 ];
 
@@ -151,12 +180,17 @@ export default function ResourcesPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {workbookSheets.map((sheet) => (
-              <a
-                key={sheet.title}
-                href={workbookUrl}
-                className="group block rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-indigo-200 hover:bg-indigo-50/40 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-amber-900/60 dark:hover:bg-amber-950/10"
-              >
+            {workbookSheets.map((sheet) => {
+              const sheetHref = getSheetUrl(sheet);
+              const isExternal = sheetHref.startsWith("http");
+              return (
+                <a
+                  key={sheet.title}
+                  href={sheetHref}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className="group block rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-indigo-200 hover:bg-indigo-50/40 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-amber-900/60 dark:hover:bg-amber-950/10"
+                >
                 <div className="mb-3 flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 dark:bg-amber-950/30 dark:text-amber-500">
@@ -175,7 +209,8 @@ export default function ResourcesPage() {
                   ))}
                 </div>
               </a>
-            ))}
+            );
+          })}
           </div>
         </section>
 

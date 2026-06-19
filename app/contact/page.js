@@ -24,6 +24,11 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const mailtoSubject = encodeURIComponent(`[Student Affairs] ${form.subject || "Query"}`);
+    const mailtoBody = encodeURIComponent(
+      `Dear Students' Welfare Board / Student Affairs Office,\n\nName: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}\n\nRegards,\n${form.name}`
+    );
+    window.location.href = `mailto:studentaffairs@iitp.ac.in,swb@iitp.ac.in?subject=${mailtoSubject}&body=${mailtoBody}`;
     setSubmitted(true);
   };
 
@@ -152,7 +157,7 @@ export default function ContactPage() {
 
         {/* Contact Form */}
         <section>
-          <div className="max-w-2xl">
+          <div className="w-full">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Send a Message</h2>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">For non-urgent inquiries, fill out the form below. We typically respond within 1–2 business days.</p>
             {submitted ? (
@@ -166,8 +171,8 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input required type="text" placeholder="Full Name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-amber-500" />
-                  <input required type="email" placeholder="Email Address" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-amber-500" />
+                  <input required type="text" placeholder="Full Name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-amber-500" />
+                  <input required type="email" placeholder="Email Address" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-amber-500" />
                 </div>
                 <select required value={form.subject} onChange={e => setForm({...form, subject: e.target.value})} className="w-full rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-amber-500">
                   <option value="">Select a Subject</option>
