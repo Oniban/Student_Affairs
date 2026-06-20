@@ -202,7 +202,7 @@ export default function ScrollPath() {
                   onMouseEnter={() => setHoveredNode(node.id)}
                   onMouseLeave={() => setHoveredNode(null)}
                 >
-                  <div className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] items-center gap-8 md:gap-0">
+                  <div className="grid grid-cols-[64px_1fr] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0">
 
                     {/* Left Column (Desktop only, displays card if index is even/0 or 2) */}
                     <div className="hidden md:block w-full text-right pr-12 md:order-1">
@@ -216,7 +216,7 @@ export default function ScrollPath() {
                     </div>
 
                     {/* Center Column: Circle & line connector (Visible on both mobile & desktop) */}
-                    <div className="flex items-center justify-center z-10 md:order-2 shrink-0">
+                    <div className="flex items-center justify-center z-10 md:order-2 shrink-0 w-16 md:w-auto">
                       <Link
                         href={node.href}
                         className={`h-8 w-8 rounded-full border-4 flex items-center justify-center transition-all duration-500 ${isHighlighted

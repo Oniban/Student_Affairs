@@ -6,8 +6,6 @@ export default function Footer() {
     { name: "About Us", href: "/about" },
     { name: "Vision & Mission", href: "/vision-mission" },
     { name: "Key Responsibilities", href: "/responsibilities" },
-    { name: "Student Welfare", href: "/welfare" },
-    { name: "Clubs & Societies", href: "/clubs" },
     { name: "Major Initiatives", href: "/initiatives" },
     { name: "Resources & Forms", href: "/resources" },
     { name: "Contact Us", href: "/contact" },
