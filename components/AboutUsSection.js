@@ -52,24 +52,28 @@ export default function AboutUsSection() {
       description:
         "Providing comprehensive student support services that foster academic success, personal development, well-being, and an inclusive campus experience.",
       position: "left",
+      href: "/about",
     },
     {
       title: "Vision & Mission",
       description:
         "To cultivate a vibrant student community by empowering individuals through leadership opportunities, holistic development programs, and meaningful campus engagement.",
       position: "left",
+      href: "/vision",
     },
     {
       title: "Key Responsibilities",
       description:
         "Managing student welfare programs, scholarships, grievance redressal, disciplinary matters, student records, and coordination of extracurricular activities.",
       position: "right",
+      href: "/responsibilities",
     },
     {
       title: "Major Initiatives",
       description:
         "Organizing orientation programs, leadership workshops, wellness campaigns, cultural events, community outreach projects, and student development initiatives.",
       position: "right",
+      href: "/initiatives",
     },
   ];
 
@@ -167,6 +171,7 @@ export default function AboutUsSection() {
                   key={`left-${index}`}
                   title={service.title}
                   description={service.description}
+                  href={service.href}
                   variants={itemVariants}
                   delay={index * 0.15}
                 />
@@ -218,6 +223,7 @@ export default function AboutUsSection() {
                   key={`right-${index}`}
                   title={service.title}
                   description={service.description}
+                  href={service.href}
                   variants={itemVariants}
                   delay={index * 0.15}
                 />
@@ -253,7 +259,34 @@ export default function AboutUsSection() {
   );
 }
 
-function ServiceItem({ title, description, variants, delay }) {
+function ServiceItem({ title, description, href, variants, delay }) {
+  const content = (
+    <>
+      <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-amber-500 transition-colors flex items-center gap-1.5">
+        {title}
+        {href && <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-0.5" />}
+      </h3>
+
+      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+        {description}
+      </p>
+    </>
+  );
+
+  if (href) {
+    return (
+      <motion.a
+        href={href}
+        className="flex flex-col group text-left cursor-pointer"
+        variants={variants}
+        transition={{ delay }}
+        whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      >
+        {content}
+      </motion.a>
+    );
+  }
+
   return (
     <motion.div
       className="flex flex-col group text-left"
@@ -261,13 +294,7 @@ function ServiceItem({ title, description, variants, delay }) {
       transition={{ delay }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
-      <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white mb-2">
-        {title}
-      </h3>
-
-      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-        {description}
-      </p>
+      {content}
     </motion.div>
   );
 }

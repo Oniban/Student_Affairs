@@ -23,7 +23,7 @@ const nodes = [
     desc: "Empowering students by supplying reliable health support, comfortable residential housing, and diverse extra-curricular engagement channels.",
     color: "from-blue-500 to-indigo-500",
     badgeColor: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400",
-    href: "/about#vision",
+    href: "/vision",
     icon: Compass,
     imageLabel: "Vision & Mission Core",
     image: "/vision.png"
@@ -34,7 +34,7 @@ const nodes = [
     desc: "Managing hostel administration, psychological support services, student club charters, financial aid auditing, and grievance redressal.",
     color: "from-pink-500 to-rose-500",
     badgeColor: "bg-pink-100 text-pink-800 dark:bg-pink-950/40 dark:text-pink-400",
-    href: "/about#responsibilities",
+    href: "/responsibilities",
     icon: CheckCircle2,
     imageLabel: "Core Responsibilities",
     image: "/responsbilities.png"

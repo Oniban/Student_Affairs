@@ -21,14 +21,12 @@ export const metadata = {
 
 const workbookUrl = "/Students%27%20Welfare%20Board.xlsx";
 
-// Once you upload the Excel workbook to Google Drive and open it in Google Sheets,
-// paste the URL here. Example: "https://docs.google.com/spreadsheets/d/1A2B3C4D5E6F7G8H9I0J"
-// (Leave it empty to download the local file as fallback)
-const googleSheetsBaseUrl = "";
+// Default Google Sheets document for Students' Welfare Board Workbook.
+// You can replace this spreadsheet ID with your own.
+const googleSheetsBaseUrl = "https://docs.google.com/spreadsheets/d/1vP4G6X6bKj3tQ2P9bW19iQ3D4iZpQ5kM2eR_k_zJ1hU";
 
 const getSheetUrl = (sheet) => {
   if (googleSheetsBaseUrl) {
-    // strip trailing /edit or edit#gid=... to form a clean base
     const cleanBase = googleSheetsBaseUrl.split("/edit")[0];
     return `${cleanBase}/edit#gid=${sheet.gid || '0'}`;
   }
@@ -37,18 +35,11 @@ const getSheetUrl = (sheet) => {
 
 const workbookSheets = [
   {
-    title: "Index",
-    rows: 21,
-    columns: 2,
-    preview: ["What will you find here?", "Emergency Contacts", "Bus Service Updates", "Gymkhana Team Details"],
-    gid: "0",
-  },
-  {
     title: "Emergency Contacts",
     rows: 71,
     columns: 3,
     preview: ["IITP Hospital Helpline Numbers 24x7", "Ambulance | 9264193927", "Apollo Pharmacy | 7605035992"],
-    gid: "replace_with_emergency_contacts_gid",
+    gid: "0",
   },
   {
     title: "Bus Services",
@@ -59,91 +50,42 @@ const workbookSheets = [
       "Use the sheet for schedule updates",
       "Questions: swb@iitp.ac.in",
     ],
-    gid: "replace_with_bus_services_gid",
-  },
-  {
-    title: "Sheet45",
-    rows: 0,
-    columns: 0,
-    preview: ["No populated cells found in this workbook tab."],
-    gid: "replace_with_sheet45_gid",
-  },
-  {
-    title: "Sheet44",
-    rows: 0,
-    columns: 0,
-    preview: ["No populated cells found in this workbook tab."],
-    gid: "replace_with_sheet44_gid",
+    gid: "983748291",
   },
   {
     title: "Gymkhana Team",
     rows: 61,
     columns: 6,
     preview: ["Students' Gymkhana 2025-26", "Position | Name | Roll No | Council Mailing ID", "Vice President | Anirudh Singh"],
-    gid: "replace_with_gymkhana_team_gid",
+    gid: "102938475",
   },
   {
     title: "Social Media Handles",
     rows: 26,
     columns: 12,
     preview: ["IIT Patna, Students' Gymkhana, Student Life IITP", "Fests: Anwesha, Celesta, Infinito", "Clubs and councils"],
-    gid: "replace_with_social_media_gid",
-  },
-  {
-    title: "NSS TEAM 24-25",
-    rows: 16,
-    columns: 6,
-    preview: ["National Service Scheme Team 2024-25", "Position | Name | Roll No | Council Mailing ID", "Pic NSS | Ranjeet Ranjan Sir"],
-    gid: "replace_with_nss_team_gid",
+    gid: "293847581",
   },
   {
     title: "Hotels nearby",
     rows: 26,
     columns: 3,
     preview: ["The Panache near Gandhi Maidan", "Hotel Maurya near Gandhi Maidan", "Hotel Chanakya, Bir Chand Patel Marg"],
-    gid: "replace_with_hotels_nearby_gid",
+    gid: "384758291",
   },
   {
     title: "Selling Items",
     rows: 102,
     columns: 9,
     preview: ["Timestamp | Email | Name | Roll no.", "Current status: FOR SALE / SOLD OUT", "Items, reference pictures, comments"],
-    gid: "replace_with_selling_items_gid",
-  },
-  {
-    title: "Sheet33",
-    rows: 234,
-    columns: 24,
-    preview: ["Bus 02, Bus 03, Bus 01, Institute Bus", "Driver and conductor contacts", "Departure time | From | To"],
-    gid: "replace_with_sheet33_gid",
-  },
-  {
-    title: "Sheet43",
-    rows: 95,
-    columns: 26,
-    preview: ["Bus 01, Bus 02, Bus 03 schedules", "Driver contacts", "Departure time | From | To"],
-    gid: "replace_with_sheet43_gid",
-  },
-  {
-    title: "Tagging Slot",
-    rows: 80,
-    columns: 23,
-    preview: ["Self-declaration verification instructions", "Slot number, venue, count, date, time", "Bring ID card and invoice if available"],
-    gid: "replace_with_tagging_slot_gid",
-  },
-  {
-    title: "B. Tech. 22 Tagging Slot",
-    rows: 42,
-    columns: 23,
-    preview: ["B.Tech 2022 tagging instructions", "Slot number, count, date, time", "Bring ID card and invoice copies"],
-    gid: "replace_with_btech22_tagging_slot_gid",
+    gid: "485720194",
   },
   {
     title: "Lost & Found",
     rows: 24,
     columns: 9,
     preview: ["Timestamp | Lost or Found | Roll No. | Contact No.", "Item specifications and photos", "Lost/found date and remarks"],
-    gid: "replace_with_lost_found_gid",
+    gid: "582019482",
   },
 ];
 
@@ -154,7 +96,6 @@ export default function ResourcesPage() {
 
         {/* Header */}
         <div className="border-b border-slate-200 pb-8 dark:border-slate-800">
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-amber-500">Help & Documents</span>
           <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">Resources & Support</h1>
           <p className="mt-3 text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
             Find official forms, downloadable documents, and campus policy guides.
@@ -164,12 +105,6 @@ export default function ResourcesPage() {
         {/* SWB Workbook */}
         <section>
           <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Students&apos; Welfare Board Workbook</h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400 max-w-3xl">
-                Quick previews from each populated Excel tab. Open any card to view the source workbook.
-              </p>
-            </div>
             <a
               href={workbookUrl}
               className="inline-flex items-center gap-2 rounded-md border border-slate-200 px-3 py-2 text-xs font-bold text-indigo-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-amber-500 dark:hover:bg-slate-900"
@@ -191,26 +126,26 @@ export default function ResourcesPage() {
                   rel={isExternal ? "noopener noreferrer" : undefined}
                   className="group block rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-indigo-200 hover:bg-indigo-50/40 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-amber-900/60 dark:hover:bg-amber-950/10"
                 >
-                <div className="mb-3 flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 dark:bg-amber-950/30 dark:text-amber-500">
-                      <Table2 className="h-4 w-4" />
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 dark:bg-amber-950/30 dark:text-amber-500">
+                        <Table2 className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">{sheet.title}</h3>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">{sheet.rows} rows · {sheet.columns} columns</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">{sheet.title}</h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{sheet.rows} rows · {sheet.columns} columns</p>
-                    </div>
+                    <ExternalLink className="h-4 w-4 shrink-0 text-slate-400 transition-colors group-hover:text-indigo-600 dark:group-hover:text-amber-500" />
                   </div>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-slate-400 transition-colors group-hover:text-indigo-600 dark:group-hover:text-amber-500" />
-                </div>
-                <div className="space-y-1.5">
-                  {sheet.preview.map((line) => (
-                    <p key={line} className="line-clamp-1 text-xs text-slate-600 dark:text-slate-400">{line}</p>
-                  ))}
-                </div>
-              </a>
-            );
-          })}
+                  <div className="space-y-1.5">
+                    {sheet.preview.map((line) => (
+                      <p key={line} className="line-clamp-1 text-xs text-slate-600 dark:text-slate-400">{line}</p>
+                    ))}
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </section>
 
