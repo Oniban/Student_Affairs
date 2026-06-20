@@ -57,7 +57,7 @@ export default function Navbar() {
         {/* Logo — pinned to the far left */}
         <Link href="/" className="flex items-center gap-2 group shrink-0 z-10">
           <img src="/assets/logo.png" alt="IIT Patna Logo" className="h-7 w-auto object-contain" />
-          <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white hidden sm:block">
+          <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">
             Student Affairs
           </span>
         </Link>
@@ -168,7 +168,7 @@ export default function Navbar() {
       )}
 
       {/* Notices Ticker Bar */}
-      <div className="bg-indigo-50/80 border-t border-b border-indigo-100/50 py-2.5 dark:bg-indigo-950/40 dark:border-indigo-900/40 transition-colors">
+      <div className="bg-indigo-50/80 border-t border-b border-indigo-100/50 py-3.5 dark:bg-indigo-950/40 dark:border-indigo-900/40 transition-colors">
         <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between overflow-hidden">
           <div className="flex items-center gap-2 overflow-hidden flex-grow mr-4">
             {/* MegaPhone Icon & Notice text background overlay wrapper */}

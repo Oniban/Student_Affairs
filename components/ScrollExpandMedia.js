@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function ScrollExpandMedia({
   mediaSrc = "/assets/admin 2.jpg",
-  bgImageSrc = "/assets/hero.mp4",
+  bgImageSrc = "/assets/hero (1).mp4",
   children,
 }) {
   const [scrollProgress, setScrollProgress] = useState(0);
