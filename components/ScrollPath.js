@@ -63,15 +63,16 @@ function NodeCard({ node, isHighlighted }) {
         }`}
     >
       {/* Colored Image Block Placeholder */}
-      <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
-        <Image
-          src={node.image}
-          alt={node.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
-        />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
+          <Image
+            src={node.image}
+            alt={node.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 40vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/30" />
 
         {/* Icon on top
         <div className="absolute inset-0 flex items-center justify-center">

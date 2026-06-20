@@ -11,14 +11,11 @@ export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    // Check local storage or system preference
+    // Only respect an explicit saved choice. No saved choice = light (default).
     const savedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    if (savedTheme) {
+
+    if (savedTheme === "dark" || savedTheme === "light") {
       setTheme(savedTheme);
-    } else if (systemPrefersDark) {
-      setTheme("dark");
     }
   }, []);
 

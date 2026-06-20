@@ -14,6 +14,7 @@ import {
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { NavBar } from "@/components/ui/tubelight-navbar";
+import { notices } from "@/lib/notices";
 
 const navItems = [
   { name: "Home", url: "/", icon: Home },
@@ -26,14 +27,7 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const announcements = [
-    "Dummy Announcement 1",
-    "Dummy Announcement 2",
-    "Dummy Announcement 3",
-    "Dummy Announcement 4",
-    "Dummy Announcement 5",
-    "Dummy Announcement 6"
-  ];
+  const announcements = notices.map((notice) => notice.title);
 
   const dynamicNavItems = navItems.map((item) => {
     if (item.name === "About Us") {
@@ -101,7 +95,7 @@ export default function Navbar() {
           </div>
 
           <Link
-            href="/resources"
+            href="/notices"
             className="text-xs font-bold text-indigo-600 hover:text-indigo-800 dark:text-amber-500 dark:hover:text-amber-400 shrink-0 flex items-center gap-1 ml-4 transition-colors"
           >
             All Notices <ArrowRight className="h-3 w-3" />
