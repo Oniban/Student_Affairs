@@ -22,8 +22,8 @@ const merriweather = Merriweather({
 });
 
 export const metadata = {
-  title: "Student Affairs Office | University",
-  description: "Official portal for Student Affairs Office. Access welfare, counseling, housing, student activities, clubs, major initiatives, and resources.",
+  title: "Student Affairs Office | IIT Patna",
+  description: "Portal for Student Affairs Office. Access welfare, counseling, housing, student activities, clubs, major initiatives, and resources.",
   keywords: "student affairs, college counseling, student housing, campus clubs, university emergency contacts, student support",
 };
 
