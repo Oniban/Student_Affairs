@@ -6,24 +6,11 @@ export const metadata = {
   description: "Access official forms, PDF downloads, policies, and frequently asked questions from the Student Affairs Office.",
 };
 
-// const downloads = [
-//   { name: "Student Handbook 2025–26", category: "Policy", size: "2.4 MB", type: "PDF" },
-//   { name: "Hostel Application Form", category: "Housing", size: "180 KB", type: "PDF" },
-//   { name: "Anti-Ragging Affidavit", category: "Policy", size: "95 KB", type: "PDF" },
-//   { name: "Club Registration Charter", category: "Clubs", size: "220 KB", type: "PDF" },
-//   { name: "Scholarship Application Form", category: "Financial Aid", size: "310 KB", type: "PDF" },
-//   { name: "Counseling Session Request Form", category: "Welfare", size: "140 KB", type: "PDF" },
-//   { name: "Room Change Request Form", category: "Housing", size: "90 KB", type: "PDF" },
-//   { name: "Student Grievance Submission Form", category: "Grievance", size: "160 KB", type: "PDF" },
-//   { name: "Club Funding Proposal Template", category: "Clubs", size: "250 KB", type: "PDF" },
-//   { name: "Academic Integrity Policy", category: "Policy", size: "1.1 MB", type: "PDF" },
-// ];
 
 const workbookUrl = "/Students%27%20Welfare%20Board.xlsx";
 
 // Default Google Sheets document for Students' Welfare Board Workbook.
-// You can replace this spreadsheet ID with your own.
-const googleSheetsBaseUrl = "https://docs.google.com/spreadsheets/d/1vP4G6X6bKj3tQ2P9bW19iQ3D4iZpQ5kM2eR_k_zJ1hU";
+const googleSheetsBaseUrl = "https://docs.google.com/spreadsheets/d/1S1zgIKaPoUYLstVKVneFgxq8b1tb7ns7/edit?usp=sharing&ouid=116898066589983545252&rtpof=true&sd=true";
 
 const getSheetUrl = (sheet) => {
   if (googleSheetsBaseUrl) {
@@ -38,54 +25,78 @@ const workbookSheets = [
     title: "Emergency Contacts",
     rows: 71,
     columns: 3,
-    preview: ["IITP Hospital Helpline Numbers 24x7", "Ambulance | 9264193927", "Apollo Pharmacy | 7605035992"],
-    gid: "0",
+    preview: [
+      "Institute Ambulance: 9508910134 (Emergency Only)",
+      "Medical Officer Dr. Shobhakant: 9612747626 | PIC Medical Dr. Ali: 9955534979",
+      "Security Officer Mr. Deepak Chourasia: 8340269042",
+    ],
+    gid: "296876019",
   },
   {
     title: "Bus Services",
     rows: 55,
     columns: 31,
     preview: [
-      "Bus queries: Mantu ji (8986162721), BSRTC Bus Manager Rajeev Ji (+916201957967)",
-      "Use the sheet for schedule updates",
-      "Questions: swb@iitp.ac.in",
+      "Bus queries: Mantu ji (8986162721), BSRTC Manager Rajeev ji (6201957967)",
+      "Route: Kalam → Asima → Block 3 → Block 9 → Gate 1 → Danapur → Bihar Museum",
+      "Rules: Arrive 5 min early | Keep ID card | Email: swb@iitp.ac.in",
     ],
-    gid: "983748291",
+    gid: "1984926883",
   },
   {
     title: "Gymkhana Team",
     rows: 61,
     columns: 6,
-    preview: ["Students' Gymkhana 2025-26", "Position | Name | Roll No | Council Mailing ID", "Vice President | Anirudh Singh"],
-    gid: "102938475",
+    preview: [
+      "Students' Gymkhana 2025-26 | VP: Anirudh Singh (9302886207)",
+      "GenSec Welfare: Arpan Patel | GenSec Sports: Sai Venkata Yeshwanth",
+      "Councils: SWB, GSC, HoSCA, STC, HAC, AIR | Email: swb@iitp.ac.in",
+    ],
+    gid: "2111237545",
   },
   {
     title: "Social Media Handles",
     rows: 26,
     columns: 12,
-    preview: ["IIT Patna, Students' Gymkhana, Student Life IITP", "Fests: Anwesha, Celesta, Infinito", "Clubs and councils"],
-    gid: "293847581",
+    preview: [
+      "IIT Patna Official | Students' Gymkhana | Student Life IITP",
+      "Fests: Anwesha (Cultural), Celesta (Technical), Infinito (Sports)",
+      "Clubs: STC, HoSCA, NSS, E-Cell, Sports Council & more",
+    ],
+    gid: "1497137290",
   },
   {
     title: "Hotels nearby",
     rows: 26,
     columns: 3,
-    preview: ["The Panache near Gandhi Maidan", "Hotel Maurya near Gandhi Maidan", "Hotel Chanakya, Bir Chand Patel Marg"],
-    gid: "384758291",
+    preview: [
+      "Lemon Tree Premier, Patna — Exhibition Road (0.49 km from Gandhi Maidan)",
+      "Hotel Maurya — Fraser Road | Hotel Chanakya — Bir Chand Patel Marg",
+      "Budget options: Hotel Aniket & Deshbandhu Hotel near Bihta campus",
+    ],
+    gid: "2130650437",
   },
   {
     title: "Selling Items",
     rows: 102,
     columns: 9,
-    preview: ["Timestamp | Email | Name | Roll no.", "Current status: FOR SALE / SOLD OUT", "Items, reference pictures, comments"],
-    gid: "485720194",
+    preview: [
+      "Timestamp | Email | Name | Roll No. | Phone | Status | Items | Photo | Comments",
+      "Common listings: Drafters, T-scales, Cycles, Calculators, Routers",
+      "Status: FOR SALE / SOLD OUT | Submit via G-Form link in Index sheet",
+    ],
+    gid: "2021443175",
   },
   {
     title: "Lost & Found",
     rows: 24,
     columns: 9,
-    preview: ["Timestamp | Lost or Found | Roll No. | Contact No.", "Item specifications and photos", "Lost/found date and remarks"],
-    gid: "582019482",
+    preview: [
+      "Timestamp | Lost or Found | Roll No. | Contact No. | Item | Specifications | Photo",
+      "Common reports: Bicycles, ID cards, Certificates, Water bottles",
+      "When lost/found + Remarks | App: tinyurl.com/TrakOnLostNFound",
+    ],
+    gid: "220593450",
   },
 ];
 

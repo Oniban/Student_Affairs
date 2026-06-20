@@ -23,15 +23,11 @@ export default function NoticesPage() {
           <div className="border-b border-indigo-100 bg-indigo-50/70 px-5 py-8 dark:border-slate-800 dark:bg-indigo-950/20 sm:px-8">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-indigo-700 ring-1 ring-indigo-100 dark:bg-slate-950 dark:text-amber-500 dark:ring-slate-800">
-                  <Megaphone className="h-4 w-4" />
-                  Notice Board
-                </div>
                 <h1 className="text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
                   All Notices
                 </h1>
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400 sm:text-base">
-                  All announcements currently shown in the notice marquee are listed here for easier reading.
+                  All announcements currently shown in the notice marquee are listed here.
                 </p>
               </div>
 
