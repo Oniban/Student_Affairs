@@ -22,7 +22,7 @@ export default function Footer() {
           <div className="flex flex-col space-y-4">
             <Link href="/" className="flex items-center gap-3">
               <img
-                src="/logo.png"
+                src="/assets/logo.png"
                 alt="IIT Patna Logo"
                 className="h-10 w-auto object-contain"
               />

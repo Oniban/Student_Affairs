@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 
-const workbookUrl = "/Students%27%20Welfare%20Board.xlsx";
+const workbookUrl = "/assets/Students%27%20Welfare%20Board.xlsx";
 
 // Default Google Sheets document for Students' Welfare Board Workbook.
 const googleSheetsBaseUrl = "https://docs.google.com/spreadsheets/d/1S1zgIKaPoUYLstVKVneFgxq8b1tb7ns7/edit?usp=sharing&ouid=116898066589983545252&rtpof=true&sd=true";

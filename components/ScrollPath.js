@@ -15,7 +15,7 @@ const nodes = [
     href: "/about",
     icon: Landmark,
     imageLabel: "Student Affairs Office",
-    image: "/student-affairs-office.png"
+    image: "/assets/student-affairs-office.png"
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const nodes = [
     href: "/vision",
     icon: Compass,
     imageLabel: "Vision & Mission Core",
-    image: "/vision.png"
+    image: "/assets/vision.png"
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const nodes = [
     href: "/responsibilities",
     icon: CheckCircle2,
     imageLabel: "Core Responsibilities",
-    image: "/responsbilities.png"
+    image: "/assets/responsbilities.png"
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const nodes = [
     href: "/initiatives",
     icon: Sparkles,
     imageLabel: "Office Campaigns & Initiatives",
-    image: "/initatives.png"
+    image: "/assets/initatives.png"
   },
 ];
 
@@ -63,16 +63,16 @@ function NodeCard({ node, isHighlighted }) {
         }`}
     >
       {/* Colored Image Block Placeholder */}
-        <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
-          <Image
-            src={node.image}
-            alt={node.title}
-            fill
-            sizes="(max-width: 768px) 100vw, 40vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/30" />
+      <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
+        <Image
+          src={node.image}
+          alt={node.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 40vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/30" />
 
         {/* Icon on top
         <div className="absolute inset-0 flex items-center justify-center">

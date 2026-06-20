@@ -3,38 +3,55 @@
 import { useRef, useEffect, useState } from "react";
 
 const ROW1_PHOTOS = [
-  "/college photos/admin 2.jpg",
-  "/college photos/admin building.jpg",
-  "/college photos/aryabhatta 2.jpg",
-  "/college photos/aryabhatta+kalam.jpg",
-  "/college photos/aryabhatta.jpg",
-  "/college photos/bake o mocha.jpg",
-  "/college photos/food court.jpg",
-  "/college photos/front sign.jpg",
-  "/college photos/frontgate night.jpg",
+  "/gallery/admin 2.jpg",
+  "/gallery/admin building.jpg",
+  "/gallery/aryabhatta 2.jpg",
+  "/gallery/aryabhatta+kalam.jpg",
+  "/gallery/aryabhatta.jpg",
+  "/gallery/bake o mocha.jpg",
+  "/gallery/food court.jpg",
+  "/gallery/front sign.jpg",
+  "/gallery/frontgate night.jpg",
 ];
 const ROW2_PHOTOS = [
-  "/college photos/frontgate.jpg",
-  "/college photos/gymkhana road.jpg",
-  "/college photos/ib.jpg",
-  "/college photos/kalaam.jpg",
-  "/college photos/lib 2.jpg",
-  "/college photos/lib far away.jpg",
-  "/college photos/mocha.jpg",
-  "/college photos/tut block.jpg",
+  "/gallery/frontgate.jpg",
+  "/gallery/gymkhana road.jpg",
+  "/gallery/ib.jpg",
+  "/gallery/kalaam.jpg",
+  "/gallery/lib 2.jpg",
+  "/gallery/lib far away.jpg",
+  "/gallery/mocha.jpg",
+  "/gallery/tut block.jpg",
 ];
 
 const ALL_PHOTOS = [...ROW1_PHOTOS, ...ROW2_PHOTOS];
 
-function getLabel(photo) {
-  return photo
-    .split("/")
-    .pop()
-    .replace(/\.[^/.]+$/, "")
-    .split(" ")
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
+const CAMPUS_SECTIONS = [
+  {
+    title: "Vibrant Student Hostels",
+    description:
+      "Our residential hostels offer more than just a place to sleep. They are hubs of friendship, collaboration, and community. With modern amenities, common rooms, recreation areas, and dining facilities, students experience a comfortable and enriching campus life.",
+    image: "/gallery/kalaam.jpg",
+  },
+  {
+    title: "Clubs & Creative Societies",
+    description:
+      "From technical innovations in robotics and coding to cultural expressions in music, drama, and dance, our diverse range of student-run clubs offers something for everyone. Gymkhana councils guide and support these activities, helping students develop leadership skills and lifelong bonds.",
+    image: "/gallery/bake o mocha.jpg",
+  },
+  {
+    title: "Sports & Fitness Infrastructure",
+    description:
+      "Physical wellness is a cornerstone of student development. Our campus boasts state-of-the-art sports facilities, including tennis courts, football fields, indoor gyms, and running tracks. Annual events bring out competitive spirits and foster teamwork and sportsmanship.",
+    image: "/gallery/gymkhana road.jpg",
+  },
+  {
+    title: "Hangouts & Social Hubs",
+    description:
+      "Popular spots like Bake O Mocha, the central food court, and library lawns provide the perfect spaces for casual discussions, study groups, or simply relaxing after classes. These spots are the beating heart of daily student interaction, creating a warm, collaborative campus atmosphere.",
+    image: "/gallery/mocha.jpg",
+  },
+];
 
 function ScrollHijackGallery({ photos }) {
   const containerRef = useRef(null);
@@ -42,7 +59,6 @@ function ScrollHijackGallery({ photos }) {
 
   const CARD_WIDTH = 300;
   const GAP = 20;
-  // Each photo scrolls ~110px of page height worth of travel
   const SCROLL_PER_CARD = 110;
   const containerHeight = `${photos.length * SCROLL_PER_CARD + 100}vh`;
 
@@ -59,9 +75,8 @@ function ScrollHijackGallery({ photos }) {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [photos.length]);
 
-  // How far the strip needs to travel: all cards minus one viewport width
   const totalStripWidth = photos.length * (CARD_WIDTH + GAP);
   const viewportWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
   const maxTranslate = Math.max(0, totalStripWidth - viewportWidth * 0.82);
@@ -69,9 +84,7 @@ function ScrollHijackGallery({ photos }) {
 
   return (
     <div ref={containerRef} style={{ height: containerHeight }} className="relative">
-      {/* Sticky fullscreen panel */}
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center bg-white dark:bg-slate-950">
-
         {/* Progress bar */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-slate-100 dark:bg-slate-800 z-20">
           <div
@@ -80,26 +93,17 @@ function ScrollHijackGallery({ photos }) {
           />
         </div>
 
-        {/* Scroll hint */}
-        <p
-          className="absolute top-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.3em] uppercase text-slate-300 dark:text-slate-600 pointer-events-none transition-opacity duration-500"
-          style={{ opacity: progress < 0.04 ? 1 : 0 }}
-        >
-          Scroll to explore
-        </p>
-
         {/* Moving photo strip */}
         <div
           className="flex items-center gap-5 pl-[10vw] will-change-transform"
           style={{ transform: `translateX(-${translateX}px)`, transition: "transform 0.08s linear" }}
         >
           {photos.map((photo, i) => {
-            const label = getLabel(photo);
             const isTall = i % 3 !== 1;
             return (
               <div
                 key={i}
-                className="relative flex-shrink-0 rounded-2xl overflow-hidden group"
+                className="relative flex-shrink-0 rounded-2xl overflow-hidden group shadow-md"
                 style={{
                   width: isTall ? "300px" : "240px",
                   height: isTall ? "500px" : "390px",
@@ -108,15 +112,9 @@ function ScrollHijackGallery({ photos }) {
               >
                 <img
                   src={photo}
-                  alt={label}
+                  alt={`Campus Life Image ${i + 1}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <span className="text-white text-[10px] font-semibold tracking-[0.22em] uppercase">
-                    {label}
-                  </span>
-                </div>
               </div>
             );
           })}
@@ -140,39 +138,49 @@ function ScrollHijackGallery({ photos }) {
 export default function CampusLifePage() {
   return (
     <div className="bg-white dark:bg-slate-950 transition-colors">
-
-      {/* ── TEXT SECTION — normal vertical scroll ── */}
-      <section className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 pt-20 pb-28 sm:pt-28 sm:pb-36">
-
-        <p className="text-xs font-semibold tracking-[0.28em] uppercase text-indigo-500 dark:text-indigo-400 mb-8">
-          Campus Life
-        </p>
-
-        {/* LN-style statement headline: mix of light-italic + heavy-black words */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-[1.08] text-slate-900 dark:text-white max-w-5xl">
-          <span className="font-extralight italic text-slate-400 dark:text-slate-500">Lorem</span>{" "}
-          ipsum dolor,{" "}
-          <span className="font-black">vivendi for wins</span>, bringing it all
-          in all ways.{" "}
-          <span className="font-extralight italic text-slate-400 dark:text-slate-500">Defining</span>{" "}
-          a{" "}
-          <span className="relative inline-block font-black">
-            legacy
-            <span className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full bg-gradient-to-r from-indigo-500 to-amber-400" />
-          </span>{" "}
-          in campus on and off the quad.
+      {/* Header section */}
+      <section className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 pt-20 pb-16 sm:pt-28 text-center">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-[1.08] text-slate-900 dark:text-white">
+          <span className="text-black dark:text-white">Campus Life</span>
         </h1>
+        <div className="mt-8 h-px w-full bg-slate-100 dark:bg-slate-800" />
+      </section>
 
-        <div className="mt-12 h-px w-full bg-slate-100 dark:bg-slate-800" />
+      {/* Alternating Cards Section */}
+      <section className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 py-12 space-y-24 md:space-y-36">
+        {CAMPUS_SECTIONS.map((section, idx) => {
+          const isEven = idx % 2 === 0;
+          return (
+            <div key={idx} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+              {/* Text content */}
+              <div className={`space-y-4 order-1 ${isEven ? "md:order-1" : "md:order-2"}`}>
+                <span className="inline-block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-amber-500">
+                  {section.subtitle}
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                  {section.title}
+                </h2>
+                <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+                  {section.description}
+                </p>
+              </div>
 
-        <p className="mt-6 text-sm text-slate-400 dark:text-slate-500 tracking-wide">
-          Scroll down to explore the campus ↓
-        </p>
+              {/* Image content */}
+              <div className={`order-2 ${isEven ? "md:order-2" : "md:order-1"} relative h-64 sm:h-80 md:h-[400px] w-full rounded-2xl overflow-hidden shadow-xl group border border-slate-100 dark:border-slate-800`}>
+                <img
+                  src={section.image}
+                  alt={section.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              </div>
+            </div>
+          );
+        })}
       </section>
 
       {/* ── SCROLL-HIJACK HORIZONTAL GALLERY ── */}
       <ScrollHijackGallery photos={ALL_PHOTOS} />
-
     </div>
   );
 }

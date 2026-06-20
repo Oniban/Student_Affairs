@@ -45,8 +45,8 @@ export default function Navbar() {
       <div className="relative w-full flex h-16 items-center px-4 sm:px-6 lg:px-8">
         {/* Logo — pinned to the far left */}
         <Link href="/" className="flex items-center gap-2 group shrink-0 z-10">
-          <img src="/logo.png" alt="IIT Patna Logo" className="h-7 w-auto object-contain" />
-          <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">
+          <img src="/assets/logo.png" alt="IIT Patna Logo" className="h-7 w-auto object-contain" />
+          <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white hidden sm:block">
             Student Affairs
           </span>
         </Link>
